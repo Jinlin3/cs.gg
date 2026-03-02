@@ -67,7 +67,7 @@ export default function UserSearch() {
             const query = q.trim().toLowerCase();
             if (query) goToUser(query);
           }}
-          className="rounded bg-black px-4 py-2 text-white"
+          className="rounded bg-black px-4 py-2 text-white hover:bg-black/50 cursor-pointer"
         >
           {loading ? "…" : "Go"}
         </button>
@@ -85,7 +85,7 @@ export default function UserSearch() {
             >
               <div className="flex flex-col">
                 <span className="font-medium">{u.name ?? u.slug}</span>
-                <span className="text-sm text-black/60">/users/{u.slug}</span>
+                <span className="text-sm text-white/60">/users/{u.slug}</span>
               </div>
             </button>
           ))}

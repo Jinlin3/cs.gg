@@ -14,6 +14,12 @@ export default function Home() {
           <li>Look up other users' progress in the <Link className="italic font-semibold" href="/users">Users</Link> section!</li>
         </ol>
       </div>
+      <p className="text-md italic sm:text-lg max-w-3xl">
+        This is a passion project of mine, so if you have any feedback or suggestions, please reach out to me on <a className="underline" href="https://www.linkedin.com/in/jackjlin0802/">LinkedIn</a>!
+      </p>
+      <p className="text-md italic sm:text-lg max-w-3xl">
+        For demo purposes, you can look at my user page <Link className="italic font-semibold underline" href="/users/hellojjlin">here</Link> to see an example!
+      </p>
     </main>
   );
 }

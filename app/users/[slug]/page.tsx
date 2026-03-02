@@ -51,21 +51,28 @@ export default async function UserPage({
         <div className="mb-10 w-full max-w-2xl">
           <div className="flex flex-col divide-y divide-black/10">
             {entries.map((entry) => {
-              const hits = [
-                entry.applications >= goals!.applications,
-                entry.leetcode >= goals!.leetcode,
-                entry.projectHours >= goals!.projectHours,
-              ];
-              const hitCount = hits.filter(Boolean).length;
+
+              // Array of objects containing (entry, goal) pairs for checking
+              const checks = [
+                { value: entry.applications, goal: goals.applications },
+                { value: entry.leetcode, goal: goals.leetcode },
+                { value: entry.projectHours, goal: goals.projectHours },
+              ].filter(c => c.goal > 0); // Only consider goals that are set (>0)
+
+              // Set background color to red by default (no goals met), then override based on checks
               let bgClass = "bg-red-300";
-              if (hitCount === hits.length) {
-                bgClass = "bg-green-300";
-              } else if (hitCount > 0) {
-                bgClass = "bg-yellow-200";
+              
+              // If there are no goals set, show gray (edge case)
+              if (checks.length === 0) {
+                bgClass = "bg-gray-200";
+              } else {
+                const hitCount = checks.filter(c => c.value >= c.goal).length;
+                if (hitCount === checks.length) bgClass = "bg-green-300"; // All goals met
+                else if (hitCount > 0) bgClass = "bg-yellow-200"; // Some goals met
               }
             
               return (
-                <div key={entry.id} className={`flex flex-col py-2 gap-y-1 px-4 rounded-sm ${bgClass}`}>
+                <div key={entry.id} className={`flex flex-col py-2 gap-y-1 px-4 rounded-sm text-black ${bgClass}`}>
                   <span className="italic">Date: {new Date(entry.date).toLocaleDateString()}</span>
                   <span>Job Applications: {entry.applications}</span>
                   <span>Leetcode Problems: {entry.leetcode}</span>

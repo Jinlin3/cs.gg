@@ -17,7 +17,7 @@ export default function NavbarClient({ user }: { user: UserLike }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-gray-800 p-4 text-white">
+    <header className="bg-black/30 p-4 text-white">
       <div className="mx-auto max-w-6xl">
         <div className="flex items-center justify-between">
 
