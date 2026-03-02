@@ -11,7 +11,7 @@ export default function Home() {
           <li>Set your daily goals in the <Link className="italic font-semibold" href="/goals">Edit Goals</Link> section!</li>
           <li>Track your progress each day on your <span className="italic font-semibold">User Page</span>!</li>
           <li>Check your history to see your progress over time!</li>
-          <li>Look up other users' progress in the <Link className="italic font-semibold" href="/users">Users</Link> section!</li>
+          <li>Look up other users' progress in the <Link className="italic font-semibold" href="/users">Search Users</Link> section!</li>
         </ol>
       </div>
       <p className="text-md italic sm:text-lg max-w-3xl">
