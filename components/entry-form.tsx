@@ -19,9 +19,9 @@ export default function EntryForm({ goals }: {  goals: Goals }) {
   todayLocal.setHours(0, 0, 0, 0); // local midnight
 
   return (
-    <div className="mb-5">
-      <h1 className="font-semibold text-3xl mb-5">Commit for {today}</h1>
-      <form className="min-w-100 max-w-175 flex flex-col" action={submitEntry}>
+    <div className="mb-5 min-w-full sm:min-w-lg">
+      <h1 className="font-semibold text-3xl mb-4">Commit for {today}</h1>
+      <form className="max-w-175 flex flex-col sm:min-w-100 bg-white p-6 rounded-2xl" action={submitEntry}>
         <input 
           type="hidden" 
           name="client-date"

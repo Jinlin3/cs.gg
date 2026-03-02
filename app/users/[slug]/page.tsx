@@ -39,13 +39,13 @@ export default async function UserPage({
   const signedInUser = await requireUser();
 
   return (
-    <main className="flex flex-col items-center gap-y-5 pt-10 text-center">
+    <main className="flex flex-col items-center gap-y-4 pt-10 text-center px-6">
 
       {signedInUser && signedInUser.slug === searchedUser.slug && (
         <EntryForm goals={goals} />
       )}
 
-      <h1 className="text-3xl font-semibold">{slug}'s History</h1>
+      <h1 className="text-3xl font-semibold sm:text-3xl">{slug}'s History</h1>
 
       {entryCount > 0 ? (
         <div className="mb-10 w-full max-w-2xl">

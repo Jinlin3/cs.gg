@@ -18,7 +18,7 @@ export default function GoalsForm({
   const [leetcode, setLeetcode] = useState(initialLeetcode);
   const [projectHours, setProjectHours] = useState(initialProjectHours);
   return (
-    <form className="min-w-100 max-w-175 flex flex-col text-center" action={submitGoals}>
+    <form className="max-w-175 min-w-full flex flex-col text-center bg-white p-6 rounded-2xl sm:min-w-lg" action={submitGoals}>
       <label htmlFor="job-applications">
         Job Applications: <strong>{jobs}</strong>
       </label>
