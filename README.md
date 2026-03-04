@@ -17,7 +17,8 @@ CS majors have it rough right now, especially in this market. This tracker helps
   - ~~Change color scheme~~
   - ~~Change navbar~~
 - ~~Make the website responsive (MAKE IT MOBILE FRIENDLY)~~
-- Create pagination for User Page entries
+- ~~Create pagination for User Page entries~~
+- Add a graph depicting data over time for every user
 ## Navigation
 - Welcome Page
   - "Username" - Navigate to your User Page
