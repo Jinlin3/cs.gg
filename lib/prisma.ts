@@ -4,7 +4,11 @@ import { PrismaClient } from '@prisma/client'
 
 const connectionString = `${process.env.DATABASE_URL}`
 
-const adapter = new PrismaPg({ connectionString })
-const prisma = new PrismaClient({ adapter })
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient }
 
-export { prisma }
+if (!globalForPrisma.prisma) {
+  const adapter = new PrismaPg({ connectionString })
+  globalForPrisma.prisma = new PrismaClient({ adapter })
+}
+
+export const prisma = globalForPrisma.prisma

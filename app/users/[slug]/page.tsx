@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/actions/actions";
 import EntryForm from "@/components/entry-form";
+import CommitGrid from "@/components/commit-grid";
 import Link from "next/link";
 
 const PAGE_SIZE = 5; // Number of entries to show per page
@@ -44,7 +45,12 @@ export default async function UserPage({
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
 
-  // Get searched user's entries
+  // Get all entries for the commit grid
+  const allEntries = await prisma.entry.findMany({
+    where: { userId: searchedUser.id },
+  });
+
+  // Get searched user's entries (paginated)
   const entries = await prisma.entry.findMany({
     where: { userId: searchedUser.id },
     orderBy: { date: "desc" },
@@ -57,11 +63,20 @@ export default async function UserPage({
 
   return (
     <main className="flex flex-col items-center gap-y-4 pt-10 text-center px-6">
+      <h1 className="font-semibold text-4xl pb-5">{slug}'s Page</h1>
       {signedInUser && signedInUser.slug === searchedUser.slug && (
         <EntryForm goals={goals} />
       )}
-
-      <h1 className="text-3xl font-semibold sm:text-3xl">{slug}'s History</h1>
+      
+      <div className="sm:hidden w-full max-w-2xl">
+        <CommitGrid entries={allEntries} goals={goals} days={125} />
+      </div>
+      <div className="hidden sm:block md:hidden w-full max-w-2xl">
+        <CommitGrid entries={allEntries} goals={goals} days={223} />
+      </div>
+      <div className="hidden md:block w-full max-w-2xl">
+        <CommitGrid entries={allEntries} goals={goals} days={279} />
+      </div>
 
       {total > 0 ? (
         <div className="mb-10 w-full max-w-2xl">
@@ -121,6 +136,18 @@ export default async function UserPage({
                 </div>
               );
             })}
+            {/* Legend */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs text-gray-500">
+              <div className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded-sm bg-green-400" /> All goals met
+              </div>
+              <div className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded-sm bg-yellow-300" /> Partial
+              </div>
+              <div className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded-sm bg-red-400" /> No goals met
+              </div>
+            </div>
           </div>
         </div>
       ) : (

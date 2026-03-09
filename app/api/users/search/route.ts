@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 
-
 export async function GET(req: Request) {
   // 1) Read the query string: /api/users/search?q=...
   const { searchParams } = new URL(req.url);
