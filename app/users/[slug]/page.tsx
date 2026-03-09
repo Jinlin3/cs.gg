@@ -75,7 +75,7 @@ export default async function UserPage({
         <CommitGrid entries={allEntries} goals={goals} days={223} />
       </div>
       <div className="hidden md:block w-full max-w-2xl">
-        <CommitGrid entries={allEntries} goals={goals} days={279} />
+        <CommitGrid entries={allEntries} goals={goals} days={272} />
       </div>
 
       {total > 0 ? (
