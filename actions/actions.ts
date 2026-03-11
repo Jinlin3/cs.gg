@@ -114,6 +114,16 @@ export async function submitEntry(formData: FormData) {
   revalidatePath("/");
 }
 
+// Records that viewerId searched for searchedId (upserts, keeps most recent timestamp)
+export async function recordRecentSearch(viewerId: string, searchedId: string) {
+  if (viewerId === searchedId) return;
+  await prisma.recentSearch.upsert({
+    where: { searcherId_searchedId: { searcherId: viewerId, searchedId } },
+    update: { searchedAt: new Date() },
+    create: { searcherId: viewerId, searchedId },
+  });
+}
+
 // Handles submission of goals form
 export async function submitGoals(formData: FormData) {
   // Handle session and get user

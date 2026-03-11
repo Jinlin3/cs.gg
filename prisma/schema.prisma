@@ -22,6 +22,19 @@ model User {
   updatedAt     DateTime  @updatedAt
   entries       Entry[]
   goals         Goals?
+  recentSearchesMade     RecentSearch[] @relation("Searcher")
+  recentSearchesReceived RecentSearch[] @relation("Searched")
+}
+
+model RecentSearch {
+  id         String   @id @default(cuid())
+  searcherId String
+  searcher   User     @relation("Searcher", fields: [searcherId], references: [id], onDelete: Cascade)
+  searchedId String
+  searched   User     @relation("Searched", fields: [searchedId], references: [id], onDelete: Cascade)
+  searchedAt DateTime @default(now())
+
+  @@unique([searcherId, searchedId])
 }
 
 model Goals {

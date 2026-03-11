@@ -9,29 +9,21 @@ type ResultUser = {
   image: string | null;
 };
 
-export default function UserSearch() {
+export default function UserSearch({ recentSearches = [] }: { recentSearches?: ResultUser[] }) {
   const router = useRouter();
 
-  // 1) What the user typed
   const [q, setQ] = useState("");
-
-  // 2) Suggestions returned from the server
   const [results, setResults] = useState<ResultUser[]>([]);
-
-  // 3) Loading state (optional)
   const [loading, setLoading] = useState(false);
 
-  // This runs every time q changes
   useEffect(() => {
     const query = q.trim().toLowerCase();
 
-    // If query is empty, clear suggestions
     if (!query) {
       setResults([]);
       return;
     }
 
-    // Debounce: wait 150ms so we don't fetch on every keystroke instantly
     const t = setTimeout(async () => {
       setLoading(true);
       try {
@@ -43,7 +35,6 @@ export default function UserSearch() {
       }
     }, 150);
 
-    // Cleanup: if q changes quickly, cancel the previous timeout
     return () => clearTimeout(t);
   }, [q]);
 
@@ -53,7 +44,6 @@ export default function UserSearch() {
 
   return (
     <div className="mt-4">
-      {/* The input */}
       <div className="flex gap-2">
         <input
           value={q}
@@ -89,6 +79,30 @@ export default function UserSearch() {
               </div>
             </button>
           ))}
+        </div>
+      )}
+
+      {/* Recently searched */}
+      {q.trim() === "" && recentSearches.length > 0 && (
+        <div className="mt-6">
+          <h2 className="mb-2 text-sm font-semibold text-white/50 uppercase tracking-wide">
+            Recently Searched
+          </h2>
+          <div className="overflow-hidden rounded border">
+            {recentSearches.map((u) => (
+              <button
+                key={u.slug}
+                type="button"
+                onClick={() => goToUser(u.slug)}
+                className="flex w-full items-center gap-3 px-3 py-2 text-left hover:bg-black/5"
+              >
+                <div className="flex flex-col">
+                  <span className="font-medium">{u.name ?? u.slug}</span>
+                  <span className="text-sm text-white/60">/users/{u.slug}</span>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>

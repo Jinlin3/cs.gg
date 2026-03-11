@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import { requireUser } from "@/actions/actions";
+import { requireUser, recordRecentSearch } from "@/actions/actions";
 import EntryForm from "@/components/entry-form";
 import CommitGrid from "@/components/commit-grid";
 import Link from "next/link";
@@ -60,6 +60,9 @@ export default async function UserPage({
 
   // Auth
   const signedInUser = await requireUser();
+  if (signedInUser) {
+    await recordRecentSearch(signedInUser.id, searchedUser.id);
+  }
 
   return (
     <main className="flex flex-col items-center gap-y-4 pt-10 text-center px-6">
@@ -68,6 +71,7 @@ export default async function UserPage({
         <EntryForm goals={goals} />
       )}
       
+      {/* GitHub Style Commit Grid */}
       <div className="sm:hidden w-full max-w-2xl">
         <CommitGrid entries={allEntries} goals={goals} days={125} />
       </div>
