@@ -22,7 +22,7 @@ export default function NavbarClient({ user }: { user: UserLike }) {
         <div className="flex items-center justify-between">
 
           <Link href="/" className="text-2xl font-semibold">
-            Daily Commit
+            cs.gg
           </Link>
 
           {/* Desktop Portion */}

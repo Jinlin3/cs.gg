@@ -8,8 +8,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Daily Commit",
-  description: "The app that helps you build a daily coding habit.",
+  title: "cs.gg",
+  description: "The op.gg for the CS grind",
 };
 
 export default function RootLayout({
