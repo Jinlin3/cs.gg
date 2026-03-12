@@ -110,7 +110,7 @@ export default async function UserPage({
             </Link>
           </div>
 
-          <div className="flex flex-col divide-y divide-black/10">
+          <div className="flex flex-col divide-y space-y-2 divide-black/10">
             {entries.map((entry) => {
               const checks = [
                 { value: entry.applications, goal: goals.applications },
@@ -129,9 +129,9 @@ export default async function UserPage({
               return (
                 <div
                   key={entry.id}
-                  className={`flex flex-col py-2 gap-y-1 px-4 rounded-sm text-black ${bgClass}`}
+                  className={`flex flex-col py-2 gap-y-1 px-4 rounded-md text-black ${bgClass}`}
                 >
-                  <span className="italic">
+                  <span className="italic font-semibold">
                     Date: {new Date(entry.date).toLocaleDateString()}
                   </span>
                   <span>Job Applications: {entry.applications}</span>
