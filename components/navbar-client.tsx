@@ -58,29 +58,29 @@ export default function NavbarClient({ user }: { user: UserLike }) {
 
         {/* Mobile Dropdown */}
         {open && (
-          <div className="md:hidden mt-4 border-t border-gray-700 pt-4">
+          <div className="md:hidden mt-4 border-t border-white/50 pt-4">
             <nav className="flex flex-col gap-y-3">
               {user && (
                 <Link
                   href={`/users/${user.slug}`}
-                  className="rounded px-2 py-2 hover:bg-gray-700"
+                  className="rounded px-2 py-2 text-white/80 hover:text-white"
                   onClick={() => setOpen(false)}>
                     {user.slug}
                 </Link>
               )}
               <Link
                 href="/users"
-                className="rounded px-2 py-2 hover:bg-gray-700"
+                className="rounded px-2 py-2 text-white/80 hover:text-white"
                 onClick={() => setOpen(false)}>
                   Search Users
               </Link>
               <Link
                 href="/goals"
-                className="rounded px-2 py-2 hover:bg-gray-700"
+                className="rounded px-2 py-2 text-white/80 hover:text-white"
                 onClick={() => setOpen(false)}>
                   Edit Goals
               </Link>
-              <div className="rounded px-2 py-2 hover:bg-gray-700 font-semibold">
+              <div className="rounded px-2 py-2 text-white/80 hover:text-white font-semibold">
                 {user ? <SignOut /> : <SignIn />}
               </div>
             </nav>
