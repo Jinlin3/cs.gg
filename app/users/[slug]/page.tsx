@@ -66,7 +66,7 @@ export default async function UserPage({
 
   return (
     <main className="flex flex-col items-center gap-y-4 pt-10 text-center px-6">
-      <h1 className="font-semibold text-4xl pb-5">{slug}'s Page</h1>
+      <h1 className="font-semibold text-4xl pb-5">{slug}</h1>
       {signedInUser && signedInUser.slug === searchedUser.slug && (
         <EntryForm goals={goals} />
       )}
@@ -118,12 +118,12 @@ export default async function UserPage({
                 { value: entry.projectHours, goal: goals.projectHours },
               ].filter((c) => c.goal > 0);
 
-              let bgClass = "bg-red-300";
-              if (checks.length === 0) bgClass = "bg-gray-200";
+              let bgClass = "bg-red-400";
+              if (checks.length === 0) bgClass = "bg-neutral-200";
               else {
                 const hitCount = checks.filter((c) => c.value >= c.goal).length;
-                if (hitCount === checks.length) bgClass = "bg-green-300";
-                else if (hitCount > 0) bgClass = "bg-yellow-200";
+                if (hitCount === checks.length) bgClass = "bg-blue-400";
+                else if (hitCount > 0) bgClass = "bg-green-300";
               }
 
               return (
@@ -143,10 +143,10 @@ export default async function UserPage({
             {/* Legend */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs text-gray-500">
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-sm bg-green-400" /> All goals met
+                <div className="w-3 h-3 rounded-sm bg-blue-400" /> All goals met
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-sm bg-yellow-300" /> Partial
+                <div className="w-3 h-3 rounded-sm bg-green-300" /> Partial
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-sm bg-red-400" /> No goals met

@@ -27,4 +27,3 @@
 ---
 
 Feel free to fork this repo, explore the code, or use it as inspiration for your own projects.
-

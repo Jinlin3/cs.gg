@@ -17,7 +17,7 @@ export default function NavbarClient({ user }: { user: UserLike }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-black/30 p-4 text-white">
+    <header className="bg-blue-400 p-4 text-white">
       <div className="mx-auto max-w-6xl">
         <div className="flex items-center justify-between">
 
@@ -26,16 +26,16 @@ export default function NavbarClient({ user }: { user: UserLike }) {
           </Link>
 
           {/* Desktop Portion */}
-          <nav className="hidden md:flex items-center gap-x-8">
+          <nav className="hidden md:flex items-center gap-x-8 text-white/80">
             {user && (
-              <Link href={`/users/${user.slug}`} className="hover:underline">
+              <Link href={`/users/${user.slug}`} className="hover:text-white">
                 {user.slug}
               </Link>
             )}
-            <Link href="/users" className="hover:underline">
+            <Link href="/users" className="hover:text-white">
               Search Users
             </Link>
-            <Link href="/goals" className="hover:underline">
+            <Link href="/goals" className="hover:text-white">
               Edit Goals
             </Link>
           </nav>

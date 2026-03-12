@@ -15,8 +15,8 @@ function getColor(entry: Entry | undefined, goals: Goals): string {
 
   if (checks.length === 0) return "bg-neutral-200";
   const hit = checks.filter((c) => c.value >= c.goal).length;
-  if (hit === checks.length) return "bg-green-400";
-  if (hit > 0) return "bg-yellow-300";
+  if (hit === checks.length) return "bg-blue-400";
+  if (hit > 0) return "bg-green-300";
   return "bg-red-400";
 }
 
