@@ -59,9 +59,9 @@ export default function CommitGrid({ entries, goals, days = 364 }: { entries: En
   return (
     <div className="py-4 px-10 border rounded-lg border-white/50">
       <div className="flex flex-col items-center">
-        <div className="inline-flex gap-[3px]">
+        <div className="inline-flex gap-0.75">
           {/* Day-of-week labels */}
-          <div className="flex flex-col gap-[3px] mr-1 pt-4">
+          <div className="flex flex-col gap-0.75 mr-1 pt-4">
             {DAY_LABELS.map((day, i) => (
               <div
                 key={day}
@@ -74,7 +74,7 @@ export default function CommitGrid({ entries, goals, days = 364 }: { entries: En
 
           {/* Week columns */}
           {weeks.map((week, wi) => (
-            <div key={wi} className="flex flex-col gap-[3px]">
+            <div key={wi} className="flex flex-col gap-0.75">
               {/* Month label */}
               <div className="h-3 relative">
                 {monthLabels.has(wi) && (

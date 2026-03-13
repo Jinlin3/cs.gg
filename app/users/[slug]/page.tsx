@@ -4,8 +4,11 @@ import { requireUser, recordRecentSearch } from "@/actions/actions";
 import EntryForm from "@/components/entry-form";
 import CommitGrid from "@/components/commit-grid";
 import Link from "next/link";
+import { calculateMetrics } from "@/lib/metrics";
+import MetricsPieChart from "@/components/metrics-pie-chart";
 
 const PAGE_SIZE = 5; // Number of entries to show per page
+const RECENT_DAYS = 20; // Number of recent days to consider for performance metrics
 
 export default async function UserPage({
   params,
@@ -14,9 +17,11 @@ export default async function UserPage({
   params: Promise<{ slug: string }>;
   searchParams?: Promise<{ page?: string }>;
 }) {
+
   // SEARCHED USER FROM SLUG
   const { slug } = await params;
   const sp = (await searchParams) ?? {};
+
   /*
     PAGINATION CHECKS
     1. Math.max with 1 to ensure page is never less than 1
@@ -45,11 +50,6 @@ export default async function UserPage({
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
 
-  // Get all entries for the commit grid
-  const allEntries = await prisma.entry.findMany({
-    where: { userId: searchedUser.id },
-  });
-
   // Get searched user's entries (paginated)
   const entries = await prisma.entry.findMany({
     where: { userId: searchedUser.id },
@@ -58,7 +58,28 @@ export default async function UserPage({
     take: PAGE_SIZE,
   });
 
-  // Auth
+  // Get all entries for the commit grid
+  const allEntries = await prisma.entry.findMany({
+    where: { userId: searchedUser.id },
+  });
+
+  // PERFORMANCE METRIC LOGIC
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const startDate = new Date(today);
+  startDate.setDate(startDate.getDate() - (RECENT_DAYS - 1));
+
+  const recentEntries = await prisma.entry.findMany({
+    where: {
+      userId: searchedUser.id,
+      date: { gte: startDate },
+    },
+    orderBy: { date: "desc" },
+  });
+
+  const metrics = calculateMetrics(recentEntries, goals, RECENT_DAYS);
+
+  // Records the search if user is signed in.
   const signedInUser = await requireUser();
   if (signedInUser) {
     await recordRecentSearch(signedInUser.id, searchedUser.id);
@@ -70,7 +91,20 @@ export default async function UserPage({
       {signedInUser && signedInUser.slug === searchedUser.slug && (
         <EntryForm goals={goals} />
       )}
-      
+
+      {/* Metrics Bar */}
+      <div className="w-full max-w-2xl border rounded-lg border-white/50 flex flex-col md:flex-row md:items-center text-white/70">
+        <div className="flex flex-col text-sm gap-y-2 flex-1 py-6">
+          <span className="font-semibold">Last 20 Days Performance</span>
+          <span>All Goals Met: {metrics.allGoalsMet} Days</span>
+          <span>Some Goals Met: {metrics.someGoalsMet} Days</span>
+          <span>No Goals Met: {metrics.noGoalsMet} Days</span>
+        </div>
+        <div className="flex-1 w-full md:w-auto border-t md:border-t-0 md:border-l border-white/20 py-2">
+          <MetricsPieChart metrics={metrics} />
+        </div>
+      </div>
+
       {/* GitHub Style Commit Grid */}
       <div className="sm:hidden w-full max-w-2xl">
         <CommitGrid entries={allEntries} goals={goals} days={125} />
