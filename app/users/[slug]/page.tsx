@@ -86,10 +86,12 @@ export default async function UserPage({
   }
 
   return (
-    <main className="flex flex-col items-center gap-y-4 pt-10 text-center px-6">
+    <section className="flex flex-col items-center gap-y-4 pt-10 text-center">
       <h1 className="font-semibold text-4xl pb-5">{slug}</h1>
       {signedInUser && signedInUser.slug === searchedUser.slug && (
-        <EntryForm goals={goals} />
+        <div className="w-full max-w-2xl">
+          <EntryForm goals={goals} />
+        </div>
       )}
 
       {/* Metrics Bar */}
@@ -191,6 +193,6 @@ export default async function UserPage({
       ) : (
         <div className="text-lg italic">No commits found.</div>
       )}
-    </main>
+    </section>
   )
 }

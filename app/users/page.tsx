@@ -20,9 +20,9 @@ export default async function UserSearchPage() {
   }
 
   return (
-    <main className="mx-auto max-w-xl pt-10 px-6">
+    <section className="pt-10 max-w-xl mx-auto">
       <h1 className="text-3xl font-semibold">Find a User</h1>
       <UserSearch recentSearches={recentSearches} />
-    </main>
+    </section>
   );
 }

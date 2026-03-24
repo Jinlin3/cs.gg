@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center gap-y-5 pt-10 px-6 text-center">
+    <section className="flex flex-col items-center gap-y-5 pt-10 text-center">
       <h1 className="text-2xl font-bold sm:text-3xl">Welcome to cs.gg!</h1>
       <p className="text-md italic sm:text-lg max-w-3xl">Struggling to find a SWE job? Having trouble sticking to the grind? Well this app is for you! This will help you set and track daily goals to improve your productivity and job search efforts.</p>
       <div>
@@ -20,6 +20,6 @@ export default function Home() {
       <p className="text-md italic sm:text-lg max-w-3xl">
         For demo purposes, you can look at my user page <Link className="italic font-semibold underline" href="/users/hellojjlin">here</Link> to see an example!
       </p>
-    </main>
+    </section>
   );
 }

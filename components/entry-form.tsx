@@ -20,7 +20,7 @@ export default function EntryForm({ goals }: {  goals: Goals }) {
 
   return (
     <div className="mb-5 min-w-full sm:min-w-lg">
-      <form className="max-w-175 flex flex-col sm:min-w-100 bg-white p-6 rounded-2xl text-black" action={submitEntry}>
+      <form className="max-w-2xl flex flex-col sm:min-w-100 bg-white p-6 rounded-2xl text-black" action={submitEntry}>
         <h1 className="font-semibold text-3xl mb-4 underline">{today}</h1>
         <input 
           type="hidden" 

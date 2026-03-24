@@ -10,18 +10,18 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  slug          String?   @unique
-  accounts      Account[]
-  sessions      Session[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  entries       Entry[]
-  goals         Goals?
+  id                     String         @id @default(cuid())
+  name                   String?
+  email                  String?        @unique
+  emailVerified          DateTime?
+  image                  String?
+  slug                   String?        @unique
+  accounts               Account[]
+  sessions               Session[]
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+  entries                Entry[]
+  goals                  Goals?
   recentSearchesMade     RecentSearch[] @relation("Searcher")
   recentSearchesReceived RecentSearch[] @relation("Searched")
 }

@@ -8,9 +8,9 @@ export default async function GoalsPage() {
 
   if (!user) {
     return (
-      <main className="flex flex-col items-center gap-y-5 pt-10 text-center px-6">
+      <section className="flex flex-col items-center gap-y-5 pt-10 text-center">
         <h1 className="text-lg italic">Please sign in to edit your goals.</h1>
-      </main>
+      </section>
     );
   }
 
@@ -21,13 +21,13 @@ export default async function GoalsPage() {
   })
 
   return (
-    <main className="flex flex-col items-center gap-y-4 mt-10 px-6">
+    <section className="flex flex-col items-center gap-y-4 mt-10">
       <h1 className="text-3xl font-semibold">Set your Daily Goals</h1>
       <GoalsForm
         initialApplications={goals!.applications}
         initialLeetcode={goals!.leetcode}
         initialProjectHours={goals!.projectHours}
       />
-    </main>
+    </section>
   );
 }

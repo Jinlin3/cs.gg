@@ -26,7 +26,7 @@ export default function NavbarClient({ user }: { user: UserLike }) {
           </Link>
 
           {/* Desktop Portion */}
-          <nav className="hidden md:flex items-center gap-x-8 text-white/80">
+          <nav className="hidden md:flex items-center gap-x-10 text-white/80">
             {user && (
               <Link href={`/users/${user.slug}`} className="hover:text-white">
                 {user.slug}
@@ -34,6 +34,9 @@ export default function NavbarClient({ user }: { user: UserLike }) {
             )}
             <Link href="/users" className="hover:text-white">
               Search Users
+            </Link>
+            <Link href="/leaderboards" className="hover:text-white">
+              Leaderboards
             </Link>
             <Link href="/goals" className="hover:text-white">
               Edit Goals
@@ -48,7 +51,7 @@ export default function NavbarClient({ user }: { user: UserLike }) {
           {/* Mobile Hamburger */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center rounded px-3 py-2 hover:bg-gray-700"
+            className="md:hidden inline-flex items-center justify-center rounded px-3 py-2 cursor-pointer"
             aria-label="Open menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}>
@@ -73,6 +76,12 @@ export default function NavbarClient({ user }: { user: UserLike }) {
                 className="rounded px-2 py-2 text-white/80 hover:text-white"
                 onClick={() => setOpen(false)}>
                   Search Users
+              </Link>
+              <Link
+                href="/leaderboards"
+                className="rounded px-2 py-2 text-white/80 hover:text-white"
+                onClick={() => setOpen(false)}>
+                  Leaderboards
               </Link>
               <Link
                 href="/goals"
