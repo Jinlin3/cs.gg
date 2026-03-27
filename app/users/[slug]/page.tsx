@@ -22,12 +22,6 @@ export default async function UserPage({
   const { slug } = await params;
   const sp = (await searchParams) ?? {};
 
-  /*
-    PAGINATION CHECKS
-    1. Math.max with 1 to ensure page is never less than 1
-    2. sp.page ?? "1" to default to page 1 if no page query param is provided
-    3. || 1 to handle non-numeric page query params, which would result in NaN from parseInt. This way, if parseInt fails, it will default to 1.
-  */
   const page = Math.max(1, Number.parseInt(sp.page ?? "1", 10) || 1);
 
   // Get searched user
